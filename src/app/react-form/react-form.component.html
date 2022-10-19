@@ -1,0 +1,77 @@
+<h3>Form Contact</h3>
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+  <p>
+    <label for="firstname">First Name </label>
+    <input type="text" id="firstname" name="firstname" formControlName="firstname">
+  </p>
+  <div *ngIf="!firstname?.valid && (firstname?.dirty || firstname?.touched)">
+    <div [hidden]="!firstname?.errors?.['required']">
+      <p style="color: red"> First Name is required </p>
+    </div>
+    <div [hidden]="!firstname?.errors?.['minlength']">
+      <p style="color: red"> First Name min length 3 </p>
+    </div>
+    <div [hidden]="!firstname?.errors?.['pattern']">
+      <p style="color: red"> Only characters are allowed </p>
+    </div>
+  </div>
+
+  <p>
+    <label>Last Name </label>
+    <input type="text" name="lastname" formControlName="lastname">
+  </p>
+  <div *ngIf="!lastname?.valid && (lastname?.dirty ||lastname?.touched)">
+    <div [hidden]="!lastname?.errors?.['pattern']">
+      <p style="color: red"> Only characters are allowed  </p>
+    </div>
+    <div [hidden]="!lastname?.errors?.['maxLength']">
+      <p style="color: red"> Max length allowed is 10 </p>
+    </div>
+    <div [hidden]="!lastname?.errors?.['required']">
+      <p style="color: red"> Last Name is required </p>
+    </div>
+  </div>
+
+  <p>
+    <label>Email </label>
+    <input type="text" name="email" formControlName="email">
+  </p>
+  <div *ngIf="!email?.valid && (email?.dirty ||email?.touched)">
+    <div [hidden]="!email?.errors?.['required']">
+      <p style="color: red"> email is required </p>
+    </div>
+    <div [hidden]="!email?.errors?.['email']">
+      <p style="color: red"> invalid email id </p>
+    </div>
+  </div>
+
+  <p>
+    <label>Gender </label>
+    <input type="radio" value="male" name="gender" formControlName="gender"> Male
+    <input type="radio" value="female" name="gender" formControlName="gender"> Female
+  </p>
+  <div *ngIf="!gender?.valid && (gender?.dirty ||gender?.touched)">
+    <div [hidden]="!gender?.errors?.['required']">
+      <p style="color: red"> R U geh ? </p>
+    </div>
+  </div>
+
+  <p>
+    <label>country </label>
+    <select name="country" formControlName="country">
+      <option [ngValue]="c.id" *ngFor="let c of countryList">
+        {{c.name}}
+      </option>
+    </select>
+  </p>
+  <div *ngIf="!country?.valid && (country?.dirty ||country?.touched)">
+    <div [hidden]="!country?.errors?.['required']">
+      <p style="color: red"> R U homeless ? </p>
+    </div>
+  </div>
+
+  <p>
+    <button type="submit" [disabled]="!contactForm.valid">Submit</button>
+  </p>
+
+</form>

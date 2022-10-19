@@ -1,0 +1,52 @@
+<p>Create Student</p>
+<div class="container">
+  <div class="col-5">
+
+    //Chúng ta đã tạo một template variable là createStudentForm, nó sẽ là một instance của directive ngForm,
+    như thế chúng ta có thể sử dụng các public API mà directive này cung cấp như là kiểm tra xem form của
+    chúng ta có valid hay không createStudentForm.invalid
+
+    <form #createStudentForm = "ngForm"
+          (ngSubmit)="onSubmit(createStudentForm)"
+    >
+      <div class="form-group">
+        <label>Student code</label>
+        <input
+          [(ngModel)] = student.studentCode
+          name="studentCode"
+          #studentCode = "ngModel"
+          required
+          minlength="6"
+          type="text" class="form-control">
+
+        <div class="text-danger" *ngIf="!studentCode.valid && studentCode.touched">
+          <p>Thông tin student code không đúng</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Student Name</label>
+        <input
+          [(ngModel)] = student.studentName
+          name="studentName"
+          #studentName = "ngModel"
+          required
+          minlength="3"
+          type="text" class="form-control" >
+
+        <div class="text-danger" *ngIf="!studentName.valid && studentName.touched">
+          <p>Mời anh/chị điền tên vào ạ</p>
+      </div>
+
+      <div class="form-group">
+        <label>Student Address</label>
+        <input
+          [(ngModel)]="student.studentAddress"
+          name="studentAddress"
+          type="text" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!createStudentForm.valid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
